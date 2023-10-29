@@ -6,13 +6,11 @@ import com.assigment.assgmentapi.models.UsersEntity;
 import com.assigment.assgmentapi.properties.AuthenticationRequest;
 import com.assigment.assgmentapi.properties.RegisterRequest;
 import com.assigment.assgmentapi.repositories.UserRepositories;
-import com.assigment.assgmentapi.repositories.UserRepository;
 import com.assigment.assgmentapi.response.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +30,6 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
-//        repository.save(users);
         userRepositories.insertUser(users);
         var jwtToken = jwtService.generateToken(users);
         return AuthenticationResponse.builder()
@@ -51,8 +48,6 @@ public class AuthenticationService {
         }catch (BadCredentialsException e){
             throw new UserException("Username atau password salah");
         }
-//        var user = repository.findById(request.getEmail())
-//                .orElseThrow();
         var user = userRepositories.getUserByUsername(request.getEmail());
         
         var jwtToken = jwtService.generateToken(user);

@@ -1,17 +1,13 @@
 package com.assigment.assgmentapi.services;
 
-import com.assigment.assgmentapi.exception.FileNotFoundException;
 import com.assigment.assgmentapi.exception.FileStorageException;
 import com.assigment.assgmentapi.properties.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,20 +45,6 @@ public class FileStorageService {
             return fileName;
         }catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
-        }
-    }
-    
-    public Resource loadFileAsResource(String fileName){
-        try{
-            Path filePath = this.fileUpload.resolve(fileName).normalize();
-            Resource resource = new UrlResource(filePath.toUri());
-            if(resource.exists()) {
-                return resource;
-            } else {
-                throw new FileNotFoundException("File not found " + fileName);
-            }
-        } catch (MalformedURLException ex) {
-            throw new FileNotFoundException("File not found " + fileName, ex);
         }
     }
 }

@@ -3,15 +3,11 @@ package com.assigment.assgmentapi.controllers;
 import com.assigment.assgmentapi.handler.ResponseHandler;
 import com.assigment.assgmentapi.models.UsersEntity;
 import com.assigment.assgmentapi.repositories.TransactionRepositories;
-import com.assigment.assgmentapi.services.FileStorageService;
 import com.assigment.assgmentapi.services.FileUploadService;
 import com.assigment.assgmentapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,8 +26,6 @@ public class UserController {
     
     @Autowired
     TransactionRepositories transactionRepositories;
-    
-    
     
     @GetMapping("profile")
     public ResponseEntity<Object> findById(Principal principal){

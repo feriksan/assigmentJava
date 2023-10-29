@@ -3,7 +3,6 @@ package com.assigment.assgmentapi.controllers;
 import com.assigment.assgmentapi.handler.ResponseHandler;
 import com.assigment.assgmentapi.models.*;
 import com.assigment.assgmentapi.repositories.TransactionRepositories;
-import com.assigment.assgmentapi.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 public class TransactionController {
-    
-    @Autowired
-    TransactionService service;
     
     @Autowired
     TransactionRepositories transactionRepositories;
