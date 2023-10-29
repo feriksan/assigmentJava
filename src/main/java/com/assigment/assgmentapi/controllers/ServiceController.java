@@ -1,5 +1,6 @@
 package com.assigment.assgmentapi.controllers;
 
+import com.assigment.assgmentapi.handler.ResponseHandler;
 import com.assigment.assgmentapi.models.BannersEntity;
 import com.assigment.assgmentapi.models.ServicesEntity;
 import com.assigment.assgmentapi.services.BannerService;
@@ -20,7 +21,8 @@ public class ServiceController {
     private ServiceService service;
     
     @GetMapping("/services")
-    public ResponseEntity<List<ServicesEntity>> findAll() {
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    public ResponseEntity<Object> findAll() {
+        List<ServicesEntity> services = service.getAll();
+        return ResponseHandler.generateResponse("Sukses", HttpStatus.OK, services);
     }
 }
