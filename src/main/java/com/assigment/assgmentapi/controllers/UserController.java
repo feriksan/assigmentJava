@@ -59,9 +59,10 @@ public class UserController {
     
     @PutMapping("profile/image")
     public ResponseEntity<Object> updateImage(@RequestParam("file") MultipartFile file, Principal principal){
-        var upload = uploadService.uploadFile(file);
+//        var upload = uploadService.uploadFile(file);
+//        file.getName();
         UsersEntity profile = new UsersEntity();
-        profile.setProfile_image(upload.getFileDownloadUri());
+        profile.setProfile_image(file.getOriginalFilename());
         UsersEntity updatedUser = service.updateProfilePicture(profile, principal.getName());
         Map<String, Object> map = new HashMap<>();
         map.put("email", updatedUser.getEmail());
