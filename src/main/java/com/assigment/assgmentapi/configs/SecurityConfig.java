@@ -36,7 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/topup").authenticated()
                         .requestMatchers("/transaction").authenticated()
                         .requestMatchers("/transaction/history").authenticated()
-                        .requestMatchers("/banner").permitAll()
+                        .requestMatchers("/banner/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
                 );
